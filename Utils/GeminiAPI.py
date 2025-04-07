@@ -72,3 +72,6 @@ class GeminiChatBot:
     def set_chat_history(self, chat_history):
         self.chat_history = chat_history
 
+
+# Unlike OpenAI, gemini doesn't use request body, but to keep the uniform input, we will use it
+
