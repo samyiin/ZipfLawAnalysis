@@ -251,9 +251,9 @@ class ScopeTracker(ast.NodeVisitor):
         for arg in node.args.posonlyargs + node.args.args + node.args.kwonlyargs:
             self._record_identifier(arg.arg, param_type, arg)
         if node.args.vararg:
-            self._record_identifier(node.args.vararg.arg, param_type, node.args.vararg)
+            self._record_identifier(node.args.vararg.arg, "vararg", node.args.vararg)
         if node.args.kwarg:
-            self._record_identifier(node.args.kwarg.arg, param_type, node.args.kwarg)
+            self._record_identifier(node.args.kwarg.arg, "kwargs", node.args.kwarg)
 
         prev = self.in_function
         self.in_function = True

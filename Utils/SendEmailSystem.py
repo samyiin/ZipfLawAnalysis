@@ -79,9 +79,9 @@ email_1_html_content = f"""
 """
 
 class SendEmailOneManager:
-    def __init__(self, auto_update_response=False):
+    def __init__(self, auto_update_response=False, root_dir="Utils/"):
         # resume the latest state
-        self.database = 'Database/SentEmailControlSystem/SentEmail1/'
+        self.database = os.path.join(root_dir, 'SentEmailControlSystem/SentEmail1/')
         self.all_state_code = [os.path.splitext(f)[0] for f in os.listdir(self.database)
                                if os.path.isfile(os.path.join(self.database, f)) and f.endswith('.csv')]
         self.all_state_code = [int(x) for x in self.all_state_code]
@@ -95,7 +95,7 @@ class SendEmailOneManager:
         self.sent_email_list_file_path = os.path.join(self.database,'backup_sent_email_list.txt')
 
         # all the responses: If there are new responses, appeand to the end of the csv and call the update responses
-        self.response_csv = "Database/SentEmailControlSystem/Email1Responses/responses.csv"
+        self.response_csv = os.path.join(root_dir, "SentEmailControlSystem/Email1Responses/responses.csv")
         if os.path.exists(self.response_csv) and auto_update_response:
             self.email_1_update_responses()
 

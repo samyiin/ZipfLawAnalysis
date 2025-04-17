@@ -18,16 +18,6 @@ class GPTChatBot:
         self.api_key = api_key
         self.chat_history = self.initial_request_body["messages"]
 
-    def chat(self, prompt):
-        # query ChatGPT, but do not add the conversation to history
-        temp_request_body = copy.deepcopy(self.initial_request_body)
-        temp_request_body["messages"].append({"role": "user", "content": prompt})
-        response = self._query_GPT(**temp_request_body)
-        return response
-
-    def set_chat_history(self, chat_history):
-        self.chat_history = chat_history
-
     # define the openai interface
     def _try_query_GPT(self, **request_body):
         client = openai.OpenAI(api_key=self.api_key)
@@ -53,3 +43,26 @@ class GPTChatBot:
             if timeout > 10:
                 raise Exception("Query failed")
         return response.choices[0].message.content
+
+    def chat(self, prompt):
+        """
+        This function only works for chatting, now everything is changed. openai have new versions, and there are ai
+        assistant already. So this one need to be up-to-date. like in _accept_gpt_response the stop reason can be
+        "function_call" now. This is unforeseeable...
+
+        :param prompt:
+        :return:
+        """
+        # query ChatGPT, but do not add the conversation to history
+        temp_request_body = copy.deepcopy(self.initial_request_body)
+        temp_request_body["messages"].append({"role": "user", "content": prompt})
+        response = self._query_GPT(**temp_request_body)
+        return response
+
+    def set_chat_history(self, chat_history):
+        self.chat_history = chat_history
+
+
+
+
+
