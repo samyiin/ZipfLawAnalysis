@@ -6,3 +6,4 @@ Utils/SentEmailControlSystem/Email1Responses/responses.csv
 playground.py
 Playground/
 FunctionCache/
+**/nltk_data/
